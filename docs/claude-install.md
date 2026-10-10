@@ -23,10 +23,10 @@ claude mcp login plugin:salekit:salekit
 
 This opens the Salekit sign-in page in the browser. Tell the user (in Vietnamese) to sign in, choose their shop and click "Cho phép". If the browser does not open, show the user the authorization URL printed in the output.
 
-If the shell has no TTY ("stdin is not a terminal"), run the bundled script instead:
+If the shell has no TTY ("stdin is not a terminal"), run the bundled script instead. `CLAUDE_PLUGIN_ROOT` is not set in your shell, so locate the installed plugin under `~/.claude/plugins/cache`:
 
-- macOS / Linux / WSL: `sh "${CLAUDE_PLUGIN_ROOT}/scripts/login-salekit.sh"`
-- Windows PowerShell: `powershell -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}\scripts\login-salekit.ps1"`
+- macOS / Linux / WSL / Git Bash: `sh "$(ls -d ~/.claude/plugins/cache/salekit/salekit/*/ | tail -1)scripts/login-salekit.sh"`
+- Windows PowerShell: `powershell -ExecutionPolicy Bypass -File (Get-ChildItem "$env:USERPROFILE\.claude\plugins\cache\salekit\salekit\*\scripts\login-salekit.ps1" | Select-Object -Last 1).FullName`
 
 Success signal: the output line `Authenticated with "plugin:salekit:salekit"`. `Connected` alone does not mean authenticated.
 
@@ -45,7 +45,7 @@ Tell the user, in Vietnamese, that Salekit is ready, that they must open a **new
 
 ## Troubleshooting
 
-- `claude mcp login` not found: Claude Code is too old. Run `claude update`, or `npm install -g @anthropic-ai/claude-code@latest`, then retry.
+- `claude mcp login` not found: Claude Code is too old (needs 2.1.210 or newer; check with `claude --version`). Run `claude update`, or `npm install -g @anthropic-ai/claude-code@latest`, then retry.
 - `Authentication timeout`: start one fresh login. Never run two logins at once.
 - HTTP 5xx during login: Salekit's auth service is temporarily unavailable. Wait and retry; do not reinstall. You can probe `curl -fsS https://api.salekit.com/.well-known/oauth-protected-resource`.
 - Tools return an authentication error in a later session: run step 2 again.

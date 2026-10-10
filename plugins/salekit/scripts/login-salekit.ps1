@@ -1,4 +1,4 @@
-# Đăng nhập Salekit cho plugin (Windows PowerShell).
+﻿# Đăng nhập Salekit cho plugin (Windows PowerShell).
 # Mở trình duyệt tới trang xác minh tài khoản Salekit qua OAuth.
 
 $claude = (Get-Command claude -ErrorAction SilentlyContinue).Source
