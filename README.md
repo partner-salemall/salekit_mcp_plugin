@@ -5,7 +5,7 @@ Plugin chính thức kết nối Claude Code và Claude Cowork với Salekit: đ
 ## Cài đặt
 
 ```
-claude plugin marketplace add https://github.com/YOUR-ORG/salekit-claude-plugin.git#main
+claude plugin marketplace add partner-salemall/salekit_mcp_plugin
 claude plugin install salekit@salekit
 ```
 

@@ -7,7 +7,7 @@ This guide is written for Claude Code to follow on the user's behalf. Host it as
 Run in order:
 
 ```
-claude plugin marketplace add https://github.com/YOUR-ORG/salekit-claude-plugin.git#main
+claude plugin marketplace add partner-salemall/salekit_mcp_plugin
 claude plugin install salekit@salekit
 ```
 
