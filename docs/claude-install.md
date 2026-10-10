@@ -17,18 +17,22 @@ If a standalone server named exactly `salekit` exists (`claude mcp get salekit`)
 
 ## 2. Log in
 
-```
-claude mcp login plugin:salekit:salekit
-```
+`claude mcp login` needs an interactive terminal. Your shell has none (it fails with "stdin isn't a terminal"), so do not run it directly. Open it in a new terminal window on the user's machine instead, with the command for their OS:
 
-This opens the Salekit sign-in page in the browser. Tell the user (in Vietnamese) to sign in, choose their shop and click "Cho phép". If the browser does not open, show the user the authorization URL printed in the output.
+- Windows (works from PowerShell, cmd or Git Bash):
+  ```
+  powershell -NoProfile -Command "Start-Process cmd -ArgumentList '/k','claude mcp login plugin:salekit:salekit'"
+  ```
+- macOS:
+  ```
+  osascript -e 'tell application "Terminal" to do script "claude mcp login plugin:salekit:salekit"' -e 'tell application "Terminal" to activate'
+  ```
+- Linux / WSL (no window needed, Python provides a pseudo-terminal):
+  ```
+  python3 -c 'import pty,sys; pty.spawn(sys.argv[1:])' claude mcp login plugin:salekit:salekit
+  ```
 
-If the shell has no TTY ("stdin is not a terminal"), run the bundled script instead. `CLAUDE_PLUGIN_ROOT` is not set in your shell, so locate the installed plugin under `~/.claude/plugins/cache`:
-
-- macOS / Linux / WSL / Git Bash: `sh "$(ls -d ~/.claude/plugins/cache/salekit/salekit/*/ | tail -1)scripts/login-salekit.sh"`
-- Windows PowerShell: `powershell -ExecutionPolicy Bypass -File (Get-ChildItem "$env:USERPROFILE\.claude\plugins\cache\salekit\salekit\*\scripts\login-salekit.ps1" | Select-Object -Last 1).FullName`
-
-Success signal: the output line `Authenticated with "plugin:salekit:salekit"`. `Connected` alone does not mean authenticated.
+A terminal window and a browser tab with the Salekit sign-in page open. Tell the user (in Vietnamese) to sign in, choose their shop, click "Cho phép", then confirm the new terminal window shows `Authenticated with "plugin:salekit:salekit"` and close that window. Wait for the user to confirm before continuing. Run only one login at a time.
 
 ## 3. Verify
 
@@ -37,7 +41,7 @@ claude plugin list
 claude mcp get plugin:salekit:salekit
 ```
 
-`salekit@salekit` must be enabled.
+`salekit@salekit` must be enabled, and `plugin:salekit:salekit` must show `Connected`. `Needs authentication` means the login did not finish: repeat step 2.
 
 ## 4. Finish
 

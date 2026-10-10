@@ -7,4 +7,10 @@ if (-not $claude) {
     exit 1
 }
 
-& $claude mcp login plugin:salekit:salekit
+# `claude mcp login` cần terminal thật. Chạy nền (ví dụ từ Claude Code) thì mở cửa sổ mới.
+if ([Console]::IsInputRedirected) {
+    Start-Process cmd -ArgumentList '/k', 'claude mcp login plugin:salekit:salekit'
+    Write-Host 'Đã mở cửa sổ đăng nhập Salekit. Hoàn tất trên trình duyệt rồi đóng cửa sổ đó.'
+} else {
+    & $claude mcp login plugin:salekit:salekit
+}
