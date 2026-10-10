@@ -1,0 +1,21 @@
+{
+  "name": "salekit",
+  "owner": {
+    "name": "Salekit",
+    "url": "https://salekit.com"
+  },
+  "metadata": {
+    "description": "Plugin chính thức của Salekit cho Claude Code và Claude Cowork",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "salekit",
+      "source": "./plugins/salekit",
+      "description": "Quản lý đơn hàng, khách hàng, doanh thu, kho và workflow Salekit bằng ngôn ngữ tự nhiên",
+      "version": "0.1.0",
+      "category": "productivity",
+      "keywords": ["salekit", "crm", "ecommerce", "ban-hang", "vietnam"]
+    }
+  ]
+}

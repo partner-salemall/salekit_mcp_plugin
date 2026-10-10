@@ -1,0 +1,12 @@
+{
+  "name": "salekit",
+  "version": "0.1.0",
+  "description": "Kết nối Claude với Salekit: đơn hàng, khách hàng, doanh thu, kho, affiliate và workflow",
+  "author": {
+    "name": "Salekit",
+    "url": "https://salekit.com"
+  },
+  "homepage": "https://salekit.com",
+  "license": "MIT",
+  "keywords": ["salekit", "crm", "ecommerce", "ban-hang", "vietnam"]
+}
