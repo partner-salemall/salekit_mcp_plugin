@@ -2,7 +2,23 @@
 
 Plugin chính thức kết nối Claude Code và Claude Cowork với Salekit: đơn hàng, khách hàng, doanh thu, kho, affiliate và workflow. Đăng nhập bằng tài khoản Salekit qua OAuth, không cần copy token.
 
-## Cài đặt
+## Cài đặt nhanh
+
+Mở terminal, dán một lệnh. Script tự cài Claude Code nếu chưa có, tự cập nhật nếu quá cũ, cài plugin rồi mở trang đăng nhập Salekit.
+
+macOS / Linux:
+
+```
+curl -fsSL https://raw.githubusercontent.com/partner-salemall/salekit_mcp_plugin/main/install.sh | sh
+```
+
+Windows (PowerShell):
+
+```
+irm https://raw.githubusercontent.com/partner-salemall/salekit_mcp_plugin/main/install.ps1 | iex
+```
+
+## Cài đặt thủ công
 
 ```
 claude plugin marketplace add partner-salemall/salekit_mcp_plugin
