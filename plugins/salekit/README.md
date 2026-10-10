@@ -15,6 +15,6 @@ Không cần biến môi trường hay token: Claude Code tự thực hiện OAu
 ## Cài đặt
 
 ```
-claude plugin marketplace add https://github.com/YOUR-ORG/salekit-claude-plugin.git#main
+claude plugin marketplace add partner-salemall/salekit_mcp_plugin
 claude plugin install salekit@salekit
 ```
