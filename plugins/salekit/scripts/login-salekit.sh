@@ -8,14 +8,17 @@ if ! command -v claude >/dev/null 2>&1; then
   exit 1
 fi
 
-# `claude mcp login` cần terminal thật (TTY). Nếu chạy nền thì bọc bằng python pty.
+LOGIN="claude mcp login plugin:salekit:salekit"
+
+# `claude mcp login` cần terminal thật (TTY). Chạy nền thì mở cửa sổ Terminal (macOS)
+# hoặc bọc bằng pseudo-terminal.
 if [ -t 0 ]; then
-  claude mcp login plugin:salekit:salekit
+  $LOGIN
+elif [ "$(uname -s)" = "Darwin" ]; then
+  osascript -e "tell application \"Terminal\" to do script \"$LOGIN\"" -e 'tell application "Terminal" to activate'
+  echo "Đã mở cửa sổ Terminal đăng nhập Salekit. Hoàn tất trên trình duyệt rồi đóng cửa sổ đó."
 elif command -v python3 >/dev/null 2>&1; then
-  python3 -c 'import pty,sys; pty.spawn(sys.argv[1:])' claude mcp login plugin:salekit:salekit
+  python3 -c 'import pty,sys; pty.spawn(sys.argv[1:])' $LOGIN
 else
-  case "$(uname -s)" in
-    Darwin) script -q /dev/null claude mcp login plugin:salekit:salekit ;;
-    *)      script -qc "claude mcp login plugin:salekit:salekit" /dev/null ;;
-  esac
+  script -qc "$LOGIN" /dev/null
 fi
