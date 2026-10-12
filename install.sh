@@ -61,11 +61,28 @@ fi
 
 echo ""
 echo "Opening the Salekit sign-in page. Sign in, choose your shop, then click \"Cho phép\" (Allow)."
-# Under `curl | sh`, stdin is a pipe; reattach the keyboard from /dev/tty.
-if [ -r /dev/tty ]; then
-  LOGIN_OK=0; claude mcp login "$SERVER" < /dev/tty || LOGIN_OK=1
+# Under `curl | sh`, stdin is a pipe; reattach the keyboard from the terminal.
+# Use the real device (e.g. /dev/ttys003): on macOS, Claude Code (Bun) crashes with
+# "EINVAL: invalid argument, kqueue" when stdin is /dev/tty, which kqueue does not support.
+TTY_DEV=""
+if [ ! -t 0 ]; then
+  T=$(ps -o tty= -p $$ 2>/dev/null | tr -d ' ')
+  case "$T" in
+    ""|"?"|"??") ;;
+    *) [ -r "/dev/$T" ] && TTY_DEV="/dev/$T" ;;
+  esac
+  if [ -z "$TTY_DEV" ] && [ "$(uname -s)" != "Darwin" ] && [ -r /dev/tty ]; then
+    TTY_DEV="/dev/tty"
+  fi
+fi
+LOGIN_OK=0
+if [ -n "$TTY_DEV" ]; then
+  claude mcp login "$SERVER" < "$TTY_DEV" || LOGIN_OK=1
+elif [ -t 0 ]; then
+  claude mcp login "$SERVER" || LOGIN_OK=1
 else
-  LOGIN_OK=0; claude mcp login "$SERVER" || LOGIN_OK=1
+  # No terminal at all: keep claude from swallowing the rest of the piped script.
+  claude mcp login "$SERVER" < /dev/null || LOGIN_OK=1
 fi
 if [ "$LOGIN_OK" -ne 0 ]; then
   echo ""
