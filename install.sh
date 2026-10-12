@@ -24,11 +24,27 @@ if ! claude mcp login --help >/dev/null 2>&1; then
   fi
 fi
 
-echo "Adding the Salekit marketplace..."
-claude plugin marketplace add "$REPO" 2>/dev/null || claude plugin marketplace update salekit
+fail() {
+  echo ""
+  echo "$1"
+  echo "Check your network connection and run the install command again."
+  echo "If it keeps failing, run the steps by hand: https://github.com/partner-salemall/salekit_mcp_plugin#manual-install-claude-code"
+  exit 1
+}
+
+# Update the marketplace if it is already registered, otherwise add it (one retry: the clone can time out).
+if claude plugin marketplace list 2>/dev/null | grep -Eq '[[:space:]]salekit[[:space:]]*$'; then
+  echo "Updating the Salekit marketplace..."
+  claude plugin marketplace update salekit || fail "Could not update the Salekit marketplace."
+else
+  echo "Adding the Salekit marketplace..."
+  claude plugin marketplace add "$REPO" ||
+    { echo "Retrying..."; claude plugin marketplace add "$REPO"; } ||
+    fail "Could not add the Salekit marketplace."
+fi
 
 echo "Installing the plugin..."
-claude plugin install salekit@salekit
+claude plugin install salekit@salekit || fail "Could not install the Salekit plugin."
 
 # A manually added `salekit` server pointing at the same endpoint duplicates the plugin's tools.
 # Remove it only in that case; leave servers pointing anywhere else alone.
@@ -47,9 +63,15 @@ echo ""
 echo "Opening the Salekit sign-in page. Sign in, choose your shop, then click \"Cho phép\" (Allow)."
 # Under `curl | sh`, stdin is a pipe; reattach the keyboard from /dev/tty.
 if [ -r /dev/tty ]; then
-  claude mcp login "$SERVER" < /dev/tty
+  LOGIN_OK=0; claude mcp login "$SERVER" < /dev/tty || LOGIN_OK=1
 else
-  claude mcp login "$SERVER"
+  LOGIN_OK=0; claude mcp login "$SERVER" || LOGIN_OK=1
+fi
+if [ "$LOGIN_OK" -ne 0 ]; then
+  echo ""
+  echo "The plugin is installed, but sign-in did not finish."
+  echo "Run this to sign in again: claude mcp login $SERVER"
+  exit 1
 fi
 
 echo ""
