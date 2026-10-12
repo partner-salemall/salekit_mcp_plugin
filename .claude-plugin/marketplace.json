@@ -5,15 +5,15 @@
     "url": "https://salekit.com"
   },
   "metadata": {
-    "description": "Plugin chính thức của Salekit cho Claude Code và Claude Cowork",
-    "version": "0.1.0"
+    "description": "Official Salekit plugin for Claude Code and Claude Cowork",
+    "version": "0.2.0"
   },
   "plugins": [
     {
       "name": "salekit",
-      "source": "./plugins/salekit",
-      "description": "Quản lý đơn hàng, khách hàng, doanh thu, kho và workflow Salekit bằng ngôn ngữ tự nhiên",
-      "version": "0.1.0",
+      "source": "./plugins/salekit-claude",
+      "description": "Manage Salekit orders, customers, revenue, inventory and workflows in natural language",
+      "version": "0.2.0",
       "category": "productivity",
       "keywords": ["salekit", "crm", "ecommerce", "ban-hang", "vietnam"]
     }

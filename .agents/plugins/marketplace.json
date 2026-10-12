@@ -1,0 +1,20 @@
+{
+  "name": "salekit",
+  "interface": {
+    "displayName": "Salekit"
+  },
+  "plugins": [
+    {
+      "name": "salekit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/salekit-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

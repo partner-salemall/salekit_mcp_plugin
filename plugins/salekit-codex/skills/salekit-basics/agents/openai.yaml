@@ -1,0 +1,4 @@
+interface:
+  display_name: "Salekit"
+  short_description: "Connect to and work with your Salekit sales data."
+  default_prompt: "Use Salekit to report sales for the last 7 days"

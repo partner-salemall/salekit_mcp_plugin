@@ -1,0 +1,29 @@
+{
+  "name": "salekit",
+  "version": "0.2.0",
+  "description": "Connect Codex to Salekit: orders, customers, revenue, inventory, affiliates and workflows",
+  "author": {
+    "name": "Salekit",
+    "url": "https://salekit.com"
+  },
+  "homepage": "https://salekit.com",
+  "repository": "https://github.com/partner-salemall/salekit_mcp_plugin.git",
+  "license": "MIT",
+  "keywords": ["salekit", "crm", "ecommerce", "ban-hang", "vietnam", "codex", "mcp"],
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Salekit",
+    "shortDescription": "Manage your Salekit sales in natural language",
+    "longDescription": "Salekit MCP server configuration plus business skills: revenue reports, profit and COD, order and shipment lookup, customer care and receivables, inventory, sales source and affiliate performance, workflows, sequences and funnels.",
+    "developerName": "Salekit",
+    "category": "Productivity",
+    "capabilities": ["Read"],
+    "websiteURL": "https://salekit.com",
+    "defaultPrompt": [
+      "Use Salekit to report sales for the last 7 days",
+      "Which customers still owe money?",
+      "Which products in the main warehouse are running low?"
+    ]
+  }
+}

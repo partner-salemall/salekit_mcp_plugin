@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "salekit": {
+      "url": "https://api.salekit.com/mcp",
+      "oauth_resource": "https://api.salekit.com/mcp"
+    }
+  }
+}
