@@ -1,7 +1,7 @@
 {
   "name": "salekit",
-  "version": "0.1.0",
-  "description": "Kết nối Claude với Salekit: đơn hàng, khách hàng, doanh thu, kho, affiliate và workflow",
+  "version": "0.2.0",
+  "description": "Connect Claude to Salekit: orders, customers, revenue, inventory, affiliates and workflows",
   "author": {
     "name": "Salekit",
     "url": "https://salekit.com"

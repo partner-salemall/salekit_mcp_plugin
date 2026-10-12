@@ -13,7 +13,7 @@ claude plugin install salekit@salekit
 
 The marketplace command clones a git repository. Give it a generous timeout and wait for it to exit; do not start a second attempt while one is running.
 
-If a standalone server named exactly `salekit` exists (`claude mcp get salekit`), remove it with `claude mcp remove salekit`. Never remove `plugin:salekit:salekit`.
+If a standalone server named exactly `salekit` exists (`claude mcp get salekit`), check its `URL:` line. If it is `https://api.salekit.com/mcp`, it duplicates the plugin: remove it with `claude mcp remove salekit` and tell the user. If it points anywhere else, leave it alone and mention it to the user. Never remove `plugin:salekit:salekit`.
 
 ## 2. Log in
 
