@@ -11,6 +11,12 @@ if ! command -v claude >/dev/null 2>&1; then
   echo "Claude Code not found. Installing..."
   curl -fsSL https://claude.ai/install.sh | bash
   export PATH="$HOME/.local/bin:$PATH"
+  if ! command -v claude >/dev/null 2>&1; then
+    echo "Could not install Claude Code, or the claude command is not on PATH yet."
+    echo "Open a new terminal and run the Salekit install command again."
+    echo "If it keeps failing, install Claude Code by hand: https://docs.claude.com/en/docs/claude-code/setup"
+    exit 1
+  fi
 fi
 
 # `claude mcp login` needs a recent Claude Code.
