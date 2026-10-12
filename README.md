@@ -45,6 +45,22 @@ Agent-readable install guide: [docs/claude-install.md](docs/claude-install.md).
 
 ## Codex (ChatGPT)
 
+Quick install: open a terminal and paste one command. The script installs the Codex CLI if missing (with npm, or Homebrew on macOS; on Windows it installs Node.js with winget when needed), updates it if too old, installs the plugin, then opens the Salekit sign-in page.
+
+macOS / Linux:
+
+```
+curl -fsSL https://raw.githubusercontent.com/partner-salemall/salekit_mcp_plugin/main/install-codex.sh | sh
+```
+
+Windows (PowerShell):
+
+```
+irm https://raw.githubusercontent.com/partner-salemall/salekit_mcp_plugin/main/install-codex.ps1 | iex
+```
+
+Manual install:
+
 ```
 codex plugin marketplace add https://github.com/partner-salemall/salekit_mcp_plugin.git --ref main
 codex plugin add salekit@salekit
